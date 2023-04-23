@@ -32,11 +32,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/edit/**").hasRole("ADMIN")
                 .requestMatchers("/create").hasRole("ADMIN")
                 .requestMatchers("/delete/**").hasRole("ADMIN")
-                .requestMatchers("/blog/delete/**").hasRole("ADMIN")
-                .requestMatchers("/blog/edit/**").hasRole("ADMIN")
-                .requestMatchers("/blog/create/**").hasRole("ADMIN")
+                .requestMatchers("/blog/**").hasRole("ADMIN")
                 .requestMatchers("/admin_panel/**").hasRole("ADMIN")
-                .requestMatchers("/findall").permitAll()
                 //Доступ разрешен всем пользователей
                 .requestMatchers("/", "/resources/**").permitAll()
                 //Все остальные страницы требуют аутентификации
