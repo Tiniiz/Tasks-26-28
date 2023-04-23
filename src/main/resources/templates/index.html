@@ -28,13 +28,13 @@
       <li class="nav-item active">
         <a class="nav-link" href="/autoblog">Блог</a>
       </li>
-      <li class="nav-item active">
+      <li sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
         <a class="nav-link" href="/registration">Регистрация</a>
       </li>
-      <li class="nav-item active">
+      <li sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
         <a class="nav-link" href="/login">Войти</a>
       </li>
-      <li class="nav-item active">
+      <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
         <a class="nav-link" href="/logout">Выйти</a>
       </li>
     </ul>
@@ -161,112 +161,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <div class="container">
-      <!--            <div class="date-list">-->
-      <!--                <table class="table table-hover table-sm text-white">-->
-      <!--                    <thead>-->
-      <!--                    <tr>-->
-      <!--                        <th scope="col">Дата</th>-->
-      <!--                        <th scope="col">Количество</th>-->
-      <!--                    </tr>-->
-
-      <!--                    <tr>-->
-      <!--                        <th scope="col">-->
-      <!--                            <input type="button" class="btn btn-primary btn-sm" value="ASC"-->
-      <!--                                   onclick="addParam(['ord1'], ['1'], ['ord2'])"/>-->
-      <!--                            <input type="button" class="btn btn-secondary btn-sm" value="DESC"-->
-      <!--                                   onclick="addParam(['ord1'], ['2'], ['ord2'])"/>-->
-      <!--                        </th>-->
-      <!--                        <th scope="col">-->
-      <!--                            <input type="button" class="btn btn-primary btn-sm" value="ASC"-->
-      <!--                                   onclick="addParam(['ord2'], ['1'], ['ord1'])"/>-->
-      <!--                            <input type="button" class="btn btn-secondary btn-sm" value="DESC"-->
-      <!--                                   onclick="addParam(['ord2'], ['2'], ['ord1'])"/>-->
-      <!--                        </th>-->
-      <!--                    </tr>-->
-      <!--                    </thead>-->
-
-      <!--                    <tbody>-->
-      <!--                    <script>-->
-      <!--                        let labels = [];-->
-      <!--                        let data = [];-->
-      <!--                        let tr = document.getElementsByClassName('table-tr');-->
-
-      <!--                        for (let i = 0; i < tr.length; i++) {-->
-      <!--                            let t = tr[i].getElementsByClassName('table-th')[3].textContent.split(' ')[0];-->
-
-      <!--                            if (!labels.includes(t)) {-->
-      <!--                                let ind = Math.max(labels.length, 0);-->
-      <!--                                labels[ind] = t;-->
-      <!--                                data[ind] = 1;-->
-      <!--                            } else {-->
-      <!--                                let ind = labels.indexOf(t);-->
-      <!--                                data[ind] += 1;-->
-      <!--                            }-->
-      <!--                        }-->
-
-      <!--                        if (window.location.search.includes('=')) {-->
-      <!--                            let sort = window.location.search.split('=');-->
-
-      <!--                            if (sort[0] == '?ord1') {-->
-      <!--                                let ok = true;-->
-
-      <!--                                while (ok) {-->
-      <!--                                    let isChanged = false;-->
-      <!--                                    for (let i = 0; i < labels.length - 1; i++) {-->
-      <!--                                        if (sort[1] == '1' && labels[i] > labels[i + 1] || sort[1] == '2' && labels[i] < labels[i + 1]) {-->
-      <!--                                            let temp = labels[i];-->
-      <!--                                            labels[i] = labels[i + 1];-->
-      <!--                                            labels[i + 1] = temp;-->
-
-      <!--                                            temp = data[i];-->
-      <!--                                            data[i] = data[i + 1];-->
-      <!--                                            data[i + 1] = temp;-->
-      <!--                                            isChanged = true;-->
-      <!--                                        }-->
-      <!--                                    }-->
-
-      <!--                                    if (!isChanged)-->
-      <!--                                        ok = false;-->
-      <!--                                }-->
-      <!--                            }-->
-      <!--                            else if (sort[0] == '?ord2') {-->
-      <!--                                let ok = true;-->
-
-      <!--                                while (ok) {-->
-      <!--                                    let isChanged = false;-->
-      <!--                                    for (let i = 0; i < labels.length - 1; i++) {-->
-      <!--                                        if (sort[1] == '1' && data[i] > data[i + 1] || sort[1] == '2' && data[i] < data[i + 1]) {-->
-      <!--                                            let temp = labels[i];-->
-      <!--                                            labels[i] = labels[i + 1];-->
-      <!--                                            labels[i + 1] = temp;-->
-
-      <!--                                            temp = data[i];-->
-      <!--                                            data[i] = data[i + 1];-->
-      <!--                                            data[i + 1] = temp;-->
-      <!--                                            isChanged = true;-->
-      <!--                                        }-->
-      <!--                                    }-->
-
-      <!--                                    if (!isChanged)-->
-      <!--                                        ok = false;-->
-      <!--                                }-->
-      <!--                            }-->
-      <!--                        }-->
-
-      <!--                        for (let i = 0; i < data.length; i++) {-->
-      <!--                            document.write("<tr>");-->
-      <!--                            document.write("<td scope=\"row\" class=\"text-white\">");-->
-      <!--                            document.write(labels[i]);-->
-      <!--                            document.write("</td>");-->
-      <!--                            document.write("<td scope=\"row\" class=\"text-white\">");-->
-      <!--                            document.write(data[i]);-->
-      <!--                            document.write("</td>");-->
-      <!--                            document.write("</tr>");-->
-      <!--                        }-->
-      <!--                    </script>-->
-      <!--                    </tbody>-->
-      <!--                </table>-->
-      <!--            </div>-->
       <canvas sec:authorize="hasAuthority('ROLE_ADMIN')" id="hist" width="600" height="400"></canvas>
     </div>
   </div>

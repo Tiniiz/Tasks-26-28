@@ -3,15 +3,57 @@ package com.example.task2628;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class BlogService {
     @Autowired
     private BlogRepository rep;
+    private final Random rnd = new Random();
     public List<Blog> listAll() {
         return rep.findAll();
     }
+
+    public void fillN(int n) {
+
+        String[] name = {"Пшеница",
+                "Рожь",
+                "Овес",
+                "Ячмень",
+                "Зерно кукурузы",
+                "Початки кукурузы",
+                "Рис нешелушеный",
+                "Рис шелушеный (неполированный рис)",
+                "Прочие зерновые",
+                "Гречиха",
+                "Зерно бобов",
+                "Зерно гороха",
+                "Зерно фасоли",
+                "Нут",
+                "Полба",
+                "Просо",
+                "Солод в зерне"};
+
+        String[] authors = {"Maru26", "Va_iwm", "Root", "Op_pow", "Glep90", "Sad_boY", "Fifi13", "Four1", "Joy_di_ko2"};
+
+        List<Blog> all = new ArrayList<>();
+
+        for (int i = 0; i < n; i ++) {
+
+            Blog blog = new Blog();
+            blog.setName(name[rnd.nextInt(0, name.length)]);
+            blog.setDate("2023-03-%02d".formatted(rnd.nextInt(1, 32)));
+            blog.setAuthor(authors[rnd.nextInt(0, authors.length)]);
+            blog.setBlog_text("Зерновые культуры");
+
+            all.add(blog);
+        }
+
+        rep.saveAll(all);
+    }
+
     public List<Blog> searchAll(String keyword) {
         keyword = keyword != null ? keyword.toLowerCase() : keyword;
 

@@ -2,6 +2,8 @@ package com.example.task2628;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name = "cargo_blog")
 public class Blog {
@@ -64,6 +66,19 @@ public class Blog {
 
     public void setBlog_text(String blog_text) {
         this.blogText = blog_text;
+    }
+
+    public static ArrayList<String> numFields() {
+        ArrayList<String> res = new ArrayList<>();
+        res.add("id");
+        res.add("name");
+        res.add("content");
+        res.add("citySend");
+        res.add("dateSend");
+        res.add("cityArrive");
+        res.add("dateArrive");
+
+        return res;
     }
 
 }

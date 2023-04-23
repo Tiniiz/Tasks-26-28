@@ -53,7 +53,7 @@ public class BlogController {
     }
 
     @RequestMapping({"/blog/search"})
-    public String search(Model model, @Param( "search") String search,
+    public String search(Model model, @Param("search") String search,
                          @Param("keyword") String keyword ) {
         List<Blog> blogList = null;
         if (Objects.equals(search, "Поиск по дате и названию")) {blogList = this.blogService.searchNameData(keyword);}
