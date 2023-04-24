@@ -26,13 +26,14 @@ public class RegistrationController {
             return "registration";
         }
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
-            model.addAttribute("passwordError", "Пароли не совпадают");
+            model.addAttribute("Error", "Пароли не совпадают");
             return "registration";
         }
         if (!userService.saveUser(userForm)) {
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            model.addAttribute("Error", "Пользователь с таким именем уже существует");
             return "registration";
         }
+
         return "redirect:/";
     }
 }

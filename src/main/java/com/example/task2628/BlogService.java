@@ -16,78 +16,34 @@ public class BlogService {
         return rep.findAll();
     }
 
-    public void fillN(int n) {
-
-        String[] name = {"Пшеница",
-                "Рожь",
-                "Овес",
-                "Ячмень",
-                "Зерно кукурузы",
-                "Початки кукурузы",
-                "Рис нешелушеный",
-                "Рис шелушеный (неполированный рис)",
-                "Прочие зерновые",
-                "Гречиха",
-                "Зерно бобов",
-                "Зерно гороха",
-                "Зерно фасоли",
-                "Нут",
-                "Полба",
-                "Просо",
-                "Солод в зерне"};
-
-        String[] authors = {"Maru26", "Va_iwm", "Root", "Op_pow", "Glep90", "Sad_boY", "Fifi13", "Four1", "Joy_di_ko2"};
-
-        List<Blog> all = new ArrayList<>();
-
-        for (int i = 0; i < n; i ++) {
-
-            Blog blog = new Blog();
-            blog.setName(name[rnd.nextInt(0, name.length)]);
-            blog.setDate("2023-03-%02d".formatted(rnd.nextInt(1, 32)));
-            blog.setAuthor(authors[rnd.nextInt(0, authors.length)]);
-            blog.setBlog_text("Зерновые культуры");
-
-            all.add(blog);
-        }
-
-        rep.saveAll(all);
-    }
-
     public List<Blog> searchAll(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
+        keyword = keyword != null ? keyword.toLowerCase() : null;
 
         if (keyword != null)
             return rep.search_all(keyword);
 
         return rep.findAll();
     }
-    public List<Blog> searchNameText(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
+    public List<Blog> searchDateName(String date, String name) {
+        date = date != null ? date.toLowerCase() : null;
+        name = name != null ? name.toLowerCase() : null;
 
-        if (keyword != null)
-            return rep.search_name_text(keyword);
-
-        return rep.findAll();
-    }
-    public List<Blog> searchNameData(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
-
-        if (keyword != null)
-            return rep.search_name_date(keyword);
+        if (date != null && name != null)
+            return rep.search_date_name(date, name);
 
         return rep.findAll();
     }
-    public List<Blog> searchDateText(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
+    public List<Blog> searchDateText(String date, String text) {
+        date = date != null ? date.toLowerCase() : null;
+        text = text != null ? text.toLowerCase() : null;
 
-        if (keyword != null)
-            return rep.search_date_text(keyword);
+        if (date != null && text != null)
+            return rep.search_date_text(date, text);
 
         return rep.findAll();
     }
     public List<Blog> searchText(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
+        keyword = keyword != null ? keyword.toLowerCase() : null;
 
         if (keyword != null)
             return rep.search_text(keyword);
@@ -95,7 +51,7 @@ public class BlogService {
         return rep.findAll();
     }
     public List<Blog> searchDate(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
+        keyword = keyword != null ? keyword.toLowerCase() : null;
 
         if (keyword != null)
             return rep.search_date(keyword);
@@ -103,7 +59,7 @@ public class BlogService {
         return rep.findAll();
     }
     public List<Blog> searchName(String keyword) {
-        keyword = keyword != null ? keyword.toLowerCase() : keyword;
+        keyword = keyword != null ? keyword.toLowerCase() : null;
 
         if (keyword != null)
             return rep.search_name(keyword);
@@ -121,5 +77,9 @@ public class BlogService {
 
     public Blog get(Long id) {
         return rep.findById(id).get();
+    }
+
+    public void truncate() {
+        rep.deleteAll();
     }
 }

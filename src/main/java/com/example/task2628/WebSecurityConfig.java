@@ -28,7 +28,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 //Доступ только для не зарегистрированных пользователей
                 .requestMatchers("/registration").permitAll()
-                .requestMatchers("/autoblog").permitAll()
+                .requestMatchers("/auto-blog").permitAll()
                 //Доступ только для пользователей с ролью Администратор
                 .requestMatchers("/edit/**").hasRole("ADMIN")
                 .requestMatchers("/create").hasRole("ADMIN")
@@ -38,6 +38,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/admin_panel/**").hasRole("ADMIN")
                 //Доступ разрешен всем пользователей
                 .requestMatchers("/", "/resources/**").permitAll()
+                //Permit css files for all users
+                .requestMatchers("/css/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()

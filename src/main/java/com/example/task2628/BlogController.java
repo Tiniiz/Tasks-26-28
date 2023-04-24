@@ -16,9 +16,29 @@ public class BlogController {
     private BlogService blogService;
 
     @GetMapping("/admin_panel")
-    public String admin_panel(Model model) {
-        List<Blog> blogList = this.blogService.listAll();
-        model.addAttribute("blogs", blogList);
+    public String admin_panel(Model model, @Param("date") String date, @Param("name") String name,
+                              @Param("text") String text, @Param("all") String all, @Param("keyword") String keyword) {
+        List<Blog> blogList = null;
+
+        if (date != null && text != null) {
+            blogList = blogService.searchDateText(date, text);
+        } else if (date != null && name != null) {
+            blogList = blogService.searchDateName(date, name);
+        } else if (date != null) {
+            blogList = blogService.searchDate(date);
+        } else if (name != null) {
+            blogList = blogService.searchName(name);
+        } else if (text != null) {
+            blogList = blogService.searchText(text);
+        } else if (all != null) {
+            blogList = blogService.searchAll(all);
+        } else {
+            blogList = blogService.listAll();
+        }
+
+        model.addAttribute("List", blogList);
+//        List<Blog> blogList = this.blogService.listAll();
+//        model.addAttribute("List", blogList);
         return "admin_panel";
     }
 
@@ -52,29 +72,20 @@ public class BlogController {
         return "redirect:/admin_panel";
     }
 
-    @RequestMapping({"/blog/search"})
-    public String search(Model model, @Param("search") String search,
-                         @Param("keyword") String keyword ) {
-        List<Blog> blogList = null;
-        if (Objects.equals(search, "Поиск по дате и названию")) {blogList = this.blogService.searchNameData(keyword);}
-        else if (Objects.equals(search, "Поиск по тексту записи")) {blogList = this.blogService.searchText(keyword);}
-        else if (Objects.equals(search, "Поиск по дате и тексту")) {blogList = this.blogService.searchDateText(keyword);}
-        else if (Objects.equals(search, "Поиск по всем критериям")) {blogList = this.blogService.searchAll(keyword);}
-        else if (Objects.equals(search, "Поиск по названию")) {blogList = this.blogService.searchName(keyword);}
-        else if (Objects.equals(search, "Поиск по дате")) {blogList = this.blogService.searchDate(keyword);}
-        else if (Objects.equals(search, "Поиск по тексту и названию")) {blogList = this.blogService.searchNameText(keyword);}
-        model.addAttribute("blogs", blogList);
-        return "admin_panel";
+    @RequestMapping("/blog/truncate")
+    public String truncateBook() {
+        blogService.truncate();
+        return "redirect:/";
     }
 
     @GetMapping("/auto-blog")
-    public String autoblog(Model model,  @Param("keyword") String keyword) {
+    public String autoblog(Model model, @Param("keyword") String keyword) {
         List<Blog> list = blogService.searchAll(keyword);
 
         model.addAttribute("List", list);
         model.addAttribute("keyword", keyword);
 
-        return  "autoblog";
+        return "autoblog";
     }
 
 

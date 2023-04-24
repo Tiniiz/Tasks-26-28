@@ -45,7 +45,7 @@ public class Cargo {
     }
 
     public void setCitySend(String citySend) {
-        citySend = citySend;
+        this.citySend = citySend;
     }
 
     public String getDateSend() {
@@ -53,7 +53,7 @@ public class Cargo {
     }
 
     public void setDateSend(String dateSend) {
-        dateSend = dateSend;
+        this.dateSend = dateSend;
     }
 
     public String getCityArrive() {
@@ -61,7 +61,7 @@ public class Cargo {
     }
 
     public void setCityArrive(String cityArrive) {
-        cityArrive = cityArrive;
+        this.cityArrive = cityArrive;
     }
 
     public String getDateArrive() {
@@ -69,7 +69,7 @@ public class Cargo {
     }
 
     public void setDateArrive(String dateArrive) {
-        dateArrive = dateArrive;
+        this.dateArrive = dateArrive;
     }
     public static ArrayList<String> numFields() {
         ArrayList<String> res = new ArrayList<>();
