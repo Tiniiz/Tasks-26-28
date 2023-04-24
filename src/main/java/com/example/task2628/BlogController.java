@@ -37,8 +37,6 @@ public class BlogController {
         }
 
         model.addAttribute("List", blogList);
-//        List<Blog> blogList = this.blogService.listAll();
-//        model.addAttribute("List", blogList);
         return "admin_panel";
     }
 
@@ -79,12 +77,27 @@ public class BlogController {
     }
 
     @GetMapping("/auto-blog")
-    public String autoblog(Model model, @Param("keyword") String keyword) {
-        List<Blog> list = blogService.searchAll(keyword);
+    public String autoblog(Model model, @Param("date") String date, @Param("name") String name,
+                           @Param("text") String text, @Param("all") String all, @Param("keyword") String keyword) {
+        List<Blog> blogList = null;
 
-        model.addAttribute("List", list);
-        model.addAttribute("keyword", keyword);
+        if (date != null && text != null) {
+            blogList = blogService.searchDateText(date, text);
+        } else if (date != null && name != null) {
+            blogList = blogService.searchDateName(date, name);
+        } else if (date != null) {
+            blogList = blogService.searchDate(date);
+        } else if (name != null) {
+            blogList = blogService.searchName(name);
+        } else if (text != null) {
+            blogList = blogService.searchText(text);
+        } else if (all != null) {
+            blogList = blogService.searchAll(all);
+        } else {
+            blogList = blogService.listAll();
+        }
 
+        model.addAttribute("List", blogList);
         return "autoblog";
     }
 

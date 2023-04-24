@@ -47,6 +47,7 @@ header {
 table {
     border-collapse: separate;
     border-spacing: 0;
+    background: rgba(0, 0, 0, 0.6);
 }
 
 thead {
@@ -54,5 +55,5 @@ thead {
     position: -webkit-sticky;
     top: 0;
 
-    background: rgb(39, 39, 39);
+    background: rgba(0, 0, 0, 0.6);
 }

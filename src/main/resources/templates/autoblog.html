@@ -47,12 +47,15 @@
         <div class="row">
             <blockquote class="blockquote text-center text-white">
                 <h5>Поиск по любому критерию:</h5>
-                <form th:action="@{/auto-blog}">
-                    <input type="text" name="keyword" id="keyword" size="70" th:value="${keyword}" required/>
-                    <input type="submit" class="btn btn-success btn-sm" value="Поиск"/>
-                    <input type="button" class="btn btn-dark btn-sm" value="Очистить" id="btnClear"
-                           onclick="clearSearch()"/>
+                <form th:action="@{/auto-blog}" class="search-form">
                 </form>
+
+                <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате записи" onclick="searchDate()"/>
+                <input type="submit" class="btn btn-success btn-sm" name="column" value="По названию" onclick="searchName()"/>
+                <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате и названию" onclick="searchDateName()"/>
+                <input type="submit" class="btn btn-success btn-sm" name="column" value="По тексту" onclick="searchText()"/>
+                <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате и тексту" onclick="searchDateText()"/>
+                <input type="submit" class="btn btn-success btn-sm" name="column" value="По всем критериям" onclick="searchAll()"/>
             </blockquote>
         </div>
 
@@ -121,6 +124,48 @@
         </table>
     </div>
 </div>
+
+<script>
+    let form = document.querySelector('.search-form');
+
+    function searchDate() {
+        form.innerHTML = '';
+        form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
+        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+    }
+
+    function searchName() {
+        form.innerHTML = '';
+        form.innerHTML += '<input type="text" name="name" id="name" size="70" placeholder="Название" required/>';
+        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+    }
+
+    function searchDateName() {
+        form.innerHTML = '';
+        form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
+        form.innerHTML += '<input type="text" name="name" id="name" size="70" placeholder="Название" required/>';
+        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+    }
+
+    function searchText() {
+        form.innerHTML = '';
+        form.innerHTML += '<input type="text" name="text" id="text" size="70" placeholder="Текст" required/>';
+        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+    }
+
+    function searchDateText() {
+        form.innerHTML = '';
+        form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
+        form.innerHTML += '<input type="text" name="text" id="text" size="70" placeholder="Текст" required/>';
+        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+    }
+
+    function searchAll() {
+        form.innerHTML = '';
+        form.innerHTML += '<input type="text" name="all" id="all" size="70" placeholder="Все критерии" required/>';
+        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+    }
+</script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.0.2/tablesort.min.js'></script>
 <script>
