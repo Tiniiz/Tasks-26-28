@@ -5,50 +5,50 @@
   <title>Перевозки грузов</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" th:href="@{/index3.css}">
+  <link rel="stylesheet" th:href="@{index3.css}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Главная</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand active" href="/">Главная</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" id="roleAdmin">Администратор</a>
+      <li  class="nav-item">
+        <a  sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link active" id="roleAdmin">Администратор</a>
       </li>
       <li class="nav-item">
-        <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" id="roleUser">Пользователь</a>
+        <a  sec:authorize="hasRole('ROLE_USER')" class="nav-link active" id="roleUser">Пользователь</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/admin_panel">Панель администратора</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link active" href="/admin_panel">Панель администратора</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/autoblog">Блог</a>
+        <a class="nav-link active" href="/auto-blog">Блог</a>
       </li>
-      <li sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
-        <a class="nav-link" href="/registration">Регистрация</a>
+      <li class="nav-item active">
+        <a sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-link active" href="/registration">Регистрация</a>
       </li>
-      <li sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
-        <a class="nav-link" href="/login">Войти</a>
+      <li class="nav-item active">
+        <a sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-link active" href="/login">Войти</a>
       </li>
-      <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
-        <a class="nav-link" href="/logout">Выйти</a>
+      <li class="nav-item active">
+        <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-link active" href="/logout">Выйти</a>
       </li>
     </ul>
   </div>
 </nav>
-
-<div class="content">
-  <header>
+<section>
+<div>
     <blockquote class="blockquote text-center text-white"><h1>Перевозки грузов</h1></blockquote>
 
     <div class="row">
       <blockquote class="blockquote text-center text-white">
         <h5>Поиск по любому критерию:</h5>
-        <form th:action="@{/shipping/}">
+        <form th:action="@{/}">
           <input type="text" name="keyword" id="keyword" size="70" th:value="${keyword}" required/>
           <input type="submit" class="btn btn-success btn-sm" value="Поиск"/>
           <input type="button" class="btn btn-danger btn-sm" value="Очистить" id="btnClear"
@@ -59,14 +59,13 @@
 
     <div class="row">
       <blockquote class="blockquote text-center">
-        <a href="/shipping/new" class="btn btn-success">Добавить запись</a>
-        <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="/shipping/fill/" class="btn btn-success">Заполнить бд</a>
-        <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="/shipping/truncate/" class="btn btn-danger">Очистить бд</a>
+        <a  sec:authorize="hasAuthority('ROLE_ADMIN')" href="/new" class="btn btn-success">Добавить запись</a>
+        <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="/fill" class="btn btn-success">Заполнить бд</a>
+        <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="/truncate" class="btn btn-danger">Очистить бд</a>
       </blockquote>
     </div>
 
     <p class="text-white fw-bold row-count"></p>
-  </header>
 
   <div class="data">
     <table id="1" class="table table-hover table-sm text-white">
@@ -165,7 +164,7 @@
     </div>
   </div>
 </div>
-
+</section>
 <script type="text/javascript">
   function addParam(keys, values, remove) {
     if (remove === undefined) remove = [];

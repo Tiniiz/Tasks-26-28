@@ -67,14 +67,13 @@ public class BlogController {
         return "admin_panel";
     }
 
-    @ResponseBody
-    @GetMapping("/blog/findall")
-    public List<Blog> findall() {
-        return  blogService.listAll();
-    }
+    @GetMapping("/auto-blog")
+    public String autoblog(Model model,  @Param("keyword") String keyword) {
+        List<Blog> list = blogService.searchAll(keyword);
 
-    @GetMapping("/autoblog")
-    public String autoblog() {
+        model.addAttribute("List", list);
+        model.addAttribute("keyword", keyword);
+
         return  "autoblog";
     }
 

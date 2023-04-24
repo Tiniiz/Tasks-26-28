@@ -23,10 +23,10 @@
                 <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" id="roleUser">Пользователь</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/admin_panel">Панель администратора</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin_panel">Панель администратора</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/autoblog">Блог</a>
+                <a class="nav-link" href="/auto-blog">Блог</a>
             </li>
             <li sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
                 <a class="nav-link" href="/registration">Регистрация</a>
@@ -42,8 +42,7 @@
     </div>
 </nav>
 
-<div class="content">
-    <header>
+<div>
         <blockquote class="blockquote text-center text-white"><h1>Панель администратора</h1></blockquote>
 
         <div class="row">
@@ -84,7 +83,6 @@
         </div>
 
         <p class="text-white fw-bold row-count"></p>
-    </header>
 
     <div class="data">
         <table id="1" class="table table-hover table-sm text-white">
