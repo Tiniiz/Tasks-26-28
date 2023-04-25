@@ -26,6 +26,9 @@
       <li class="nav-item active">
         <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin_panel">Панель администратора</a>
       </li>
+      <li class="nav-item">
+        <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin/users">Управление пользователями</a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" href="/auto-blog">Блог</a>
       </li>
@@ -146,11 +149,11 @@
         <th scope="row" class="table-th text-white" th:text="${obj.cityArrive}">отсутствует</th>
         <th scope="row" class="table-th text-white" th:text="${obj.dateArrive}">отсутствует</th>
         <td>
-          <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{'/shipping/edit/'+${obj.id}}">
+          <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{'/edit/'+${obj.id}}">
             <button type="button" class="btn btn-info">Редактировать</button>
           </a>
 
-          <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{'/shipping/delete/'+${obj.id}}">
+          <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{'/delete/'+${obj.id}}">
             <button type="button" class="btn btn-danger">Удалить</button>
           </a>
         </td>

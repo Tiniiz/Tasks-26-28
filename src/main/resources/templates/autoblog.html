@@ -25,6 +25,9 @@
             <li class="nav-item active">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin_panel">Панель администратора</a>
             </li>
+            <li class="nav-item">
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin/users">Управление пользователями</a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link active" href="/auto-blog">Блог</a>
             </li>

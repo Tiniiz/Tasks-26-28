@@ -3,6 +3,7 @@ package com.example.task2628;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,6 +44,11 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
+    public boolean save(User user) {
+        userRepository.save(user);
+        return true;
+    }
+
     public boolean saveUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
 
@@ -51,6 +57,19 @@ public class UserService implements UserDetailsService {
         }
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return true;
+    }
+
+    public boolean saveAdmin(User user) {
+        User userFromDb = userRepository.findByUsername(user.getUsername());
+
+        if (userFromDb != null) {
+            return false;
+        }
+
+        user.setRoles(Collections.singleton(new Role(2L, "ROLE_ADMIN")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

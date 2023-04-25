@@ -60,7 +60,7 @@ public class AppController {
         return "redirect:/";
     }
 
-    @RequestMapping("/shipping/edit/{id}")
+    @RequestMapping("/edit/{id}")
     public ModelAndView editBookForm(@PathVariable(name = "id") Long id) {
         ModelAndView mav = new ModelAndView("edit");
         Cargo cargo = service.get(id);
