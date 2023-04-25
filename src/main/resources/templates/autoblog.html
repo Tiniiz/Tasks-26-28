@@ -10,7 +10,8 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Главная</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -26,7 +27,8 @@
                 <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin_panel">Панель администратора</a>
             </li>
             <li class="nav-item">
-                <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin/users">Управление пользователями</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin/users">Управление
+                    пользователями</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link active" href="/auto-blog">Блог</a>
@@ -44,23 +46,30 @@
     </div>
 </nav>
 
-<div >
-        <blockquote class="blockquote text-center text-white"><h1>Автоблог</h1></blockquote>
+<div>
+    <blockquote class="blockquote text-center text-white"><h1>Автоблог</h1></blockquote>
 
-        <div class="row">
-            <blockquote class="blockquote text-center text-white">
-                <h5>Поиск по любому критерию:</h5>
-                <form th:action="@{/auto-blog}" class="search-form">
-                </form>
+    <div class="row">
+        <blockquote class="blockquote text-center text-white">
+            <h5>Поиск по любому критерию:</h5>
+            <form th:action="@{/auto-blog}" class="search-form">
+            </form>
 
-                <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате записи" onclick="searchDate()"/>
-                <input type="submit" class="btn btn-success btn-sm" name="column" value="По названию" onclick="searchName()"/>
-                <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате и названию" onclick="searchDateName()"/>
-                <input type="submit" class="btn btn-success btn-sm" name="column" value="По тексту" onclick="searchText()"/>
-                <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате и тексту" onclick="searchDateText()"/>
-                <input type="submit" class="btn btn-success btn-sm" name="column" value="По всем критериям" onclick="searchAll()"/>
-            </blockquote>
-        </div>
+            <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате записи"
+                   onclick="searchDate()"/>
+            <input type="submit" class="btn btn-success btn-sm" name="column" value="По названию"
+                   onclick="searchName()"/>
+            <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате и названию"
+                   onclick="searchDateName()"/>
+            <input type="submit" class="btn btn-success btn-sm" name="column" value="По тексту" onclick="searchText()"/>
+            <input type="submit" class="btn btn-success btn-sm" name="column" value="По дате и тексту"
+                   onclick="searchDateText()"/>
+            <input type="submit" class="btn btn-success btn-sm" name="column" value="По всем критериям"
+                   onclick="searchAll()"/>
+            <input type="submit" class="btn btn-danger btn-sm" name="column" value="Убрать поиск"
+                   onclick="searchNull()"/>
+        </blockquote>
+    </div>
 
     <p class="text-white fw-bold row-count"></p>
 
@@ -79,37 +88,37 @@
             <tr>
                 <th scope="col">
                     <input type="button" class="btn btn-primary btn-sm" value="ASC"
-                          />
+                    />
                     <input type="button" class="btn btn-secondary btn-sm" value="DESC"
-                           />
+                    />
                 </th>
 
                 <th scope="col">
                     <input type="button" class="btn btn-primary btn-sm" value="ASC"
-                           />
+                    />
                     <input type="button" class="btn btn-secondary btn-sm" value="DESC"
-                          />
+                    />
                 </th>
 
                 <th scope="col">
                     <input type="button" class="btn btn-primary btn-sm" value="ASC"
-                           />
+                    />
                     <input type="button" class="btn btn-secondary btn-sm" value="DESC"
-                          />
+                    />
                 </th>
 
                 <th scope="col">
                     <input type="button" class="btn btn-primary btn-sm" value="ASC"
-                          />
+                    />
                     <input type="button" class="btn btn-secondary btn-sm" value="DESC"
-                           />
+                    />
                 </th>
 
                 <th scope="col">
                     <input type="button" class="btn btn-primary btn-sm" value="ASC"
-                           />
+                    />
                     <input type="button" class="btn btn-secondary btn-sm" value="DESC"
-                           />
+                    />
                 </th>
 
             </tr>
@@ -132,41 +141,69 @@
     let form = document.querySelector('.search-form');
 
     function searchDate() {
-        form.innerHTML = '';
-        form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
-        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        if (form.innerHTML.length == 0) {
+            form.innerHTML = '';
+            form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
+            form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        } else {
+            form.innerHTML = '';
+        }
     }
 
     function searchName() {
-        form.innerHTML = '';
-        form.innerHTML += '<input type="text" name="name" id="name" size="70" placeholder="Название" required/>';
-        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        if (form.innerHTML.length == 0) {
+            form.innerHTML = '';
+            form.innerHTML += '<input type="text" name="name" id="name" size="70" placeholder="Название" required/>';
+            form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        } else {
+            form.innerHTML = '';
+        }
     }
 
     function searchDateName() {
-        form.innerHTML = '';
-        form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
-        form.innerHTML += '<input type="text" name="name" id="name" size="70" placeholder="Название" required/>';
-        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        if (form.innerHTML.length == 0) {
+            form.innerHTML = '';
+            form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
+            form.innerHTML += '<input type="text" name="name" id="name" size="70" placeholder="Название" required/>';
+            form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        } else {
+            form.innerHTML = '';
+        }
     }
 
     function searchText() {
-        form.innerHTML = '';
-        form.innerHTML += '<input type="text" name="text" id="text" size="70" placeholder="Текст" required/>';
-        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        if (form.innerHTML.length == 0) {
+            form.innerHTML = '';
+            form.innerHTML += '<input type="text" name="text" id="text" size="70" placeholder="Текст" required/>';
+            form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        } else {
+            form.innerHTML = '';
+        }
     }
 
     function searchDateText() {
-        form.innerHTML = '';
-        form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
-        form.innerHTML += '<input type="text" name="text" id="text" size="70" placeholder="Текст" required/>';
-        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        if (form.innerHTML.length == 0) {
+            form.innerHTML = '';
+            form.innerHTML += '<input type="text" name="date" id="date" size="70" placeholder="Дата" required/>';
+            form.innerHTML += '<input type="text" name="text" id="text" size="70" placeholder="Текст" required/>';
+            form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        } else {
+            form.innerHTML = '';
+        }
     }
 
     function searchAll() {
+        if (form.innerHTML.length == 0) {
+            form.innerHTML = '';
+            form.innerHTML += '<input type="text" name="all" id="all" size="70" placeholder="Все критерии" required/>';
+            form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
+        } else {
+            form.innerHTML = '';
+        }
+    }
+
+    function searchNull() {
         form.innerHTML = '';
-        form.innerHTML += '<input type="text" name="all" id="all" size="70" placeholder="Все критерии" required/>';
-        form.innerHTML += '<input type="submit" class="btn btn-warning btn-sm" value="Поиск"/>';
     }
 </script>
 
