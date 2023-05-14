@@ -17,21 +17,21 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("useForm", new User());
-        return "registration";
+        return "index";
     }
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("useForm") @Valid User userForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "index";
         }
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
             model.addAttribute("Error", "Пароли не совпадают");
-            return "registration";
+            return "index";
         }
         if (!userService.saveUser(userForm)) {
             model.addAttribute("Error", "Пользователь с таким именем уже существует");
-            return "registration";
+            return "index";
         }
 
         return "redirect:/";

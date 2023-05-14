@@ -20,11 +20,14 @@ public class AppController {
 
     @RequestMapping("/")
     public String HomePage(Model model, @Param("keyword") String keyword,
-                           @Param("sort_by") String sort_by, @Param("reverse") String reverse) {
+                           @Param("sort_by") String sort_by, @Param("reverse") String reverse){
         List<Cargo> list = service.ListAll(keyword, sort_by, reverse);
 
         model.addAttribute("List", list);
         model.addAttribute("keyword", keyword);
+        Cargo cargo = new Cargo();
+        model.addAttribute("cargo", cargo);
+        model.addAttribute("useForm", new User());
 
         return "index";
     }
@@ -33,12 +36,11 @@ public class AppController {
     public String fillBook(Model model, @Param("n") String n) {
         if (n != null) {
             service.fillN(Integer.parseInt(n));
-            return "redirect:/";
         }
         else {
             model.addAttribute("n", 30);
-            return "fill";
         }
+        return "redirect:/";
     }
 
     @RequestMapping("/truncate")
@@ -47,12 +49,11 @@ public class AppController {
         return "redirect:/";
     }
 
-    @RequestMapping("/new")
-    public String newBookForm(Model model) {
-        Cargo cargo = new Cargo();
-        model.addAttribute("cargo", cargo);
-        return "create";
-    }
+//    @RequestMapping("/new")
+//    public String newBookForm(Model model) {
+//
+//        return "create";
+//    }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveBook(@ModelAttribute("cargo") Cargo cargo) {

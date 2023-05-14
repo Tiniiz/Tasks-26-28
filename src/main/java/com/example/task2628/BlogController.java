@@ -37,7 +37,7 @@ public class BlogController {
         }
 
         model.addAttribute("List", blogList);
-        return "admin_panel";
+        return "autoblog";
     }
 
     @RequestMapping({"/blog/new"})
@@ -98,8 +98,15 @@ public class BlogController {
         }
 
         model.addAttribute("List", blogList);
-        return "autoblog";
+        return "blog";
     }
 
+    @RequestMapping("/get-more/{id}")
+    public ModelAndView getMoreBlog(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("edit-blog");
+        Blog blog = this.blogService.get(id);
+        mav.addObject("blog", blog);
+        return mav;
+    }
 
 }

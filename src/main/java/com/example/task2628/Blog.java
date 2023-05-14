@@ -9,6 +9,8 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private String url;
     private String name;
     private String date;
     private String blogText;
@@ -19,6 +21,7 @@ public class Blog {
     public String toString() {
         return "blog{" +
                 "id=" + id +
+                "url=" + url +
                 ", name='" + name + '\'' +
                 ", date=" + date +
                 ", blogText='" + blogText + '\'' +
@@ -28,6 +31,22 @@ public class Blog {
 
     public String getAuthor() {
         return author;
+    }
+
+    public String getBlogText() {
+        return blogText;
+    }
+
+    public void setBlogText(String blogText) {
+        this.blogText = blogText;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public void setAuthor(String author) {
