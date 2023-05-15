@@ -19,15 +19,18 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" id="roleAdmin">Администратор</a>
+      <li>
+        <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:text="${#authentication.name}" class="nav-link"></a>
       </li>
       <li class="nav-item">
         <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin/users">Управление
           пользователями</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link active" href="/auto-blog">Блог</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin_panel">Блог</a>
+      </li>
+      <li class="nav-item active">
+        <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" href="/auto-blog">Блог</a>
       </li>
       <li sec:authorize="not hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-item active">
         <a class="nav-link" href="/registration">Регистрация</a>
@@ -88,14 +91,15 @@
 </section>
 </center>
 
-<footer class="text-center text-lg-start bg-dark text-muted fixed-bottom">
+<footer class="text-center text-lg-start bg-dark text-muted">
   <section class="p-3">
     <div class="container">
       <div class="row align-items-start">
         <div class="col">
           <h4><a class="text-white text-decoration-none" href="/">Главная</a></h4>
           <h5><a class="text-white text-decoration-none" href="/admin/users">Управление пользователями</a></h5>
-          <h5><a class="text-white text-decoration-none" href="/auto-blog">Блог</a></h5>
+          <h5><a sec:authorize="hasAuthority('ROLE_USER')" class="text-white text-decoration-none" href="/auto-blog">Блог</a></h5>
+          <h5><a sec:authorize="hasAuthority('ROLE_ADMIN')" class="text-white text-decoration-none" href="/admin_panel">Блог</a></h5>
         </div>
         <div class="col">
           <h5 class="text-white">Авторство</h5>
@@ -126,6 +130,7 @@
     </div>
   </section>
 </footer>
+
 
 <script>
   let form = document.querySelector('.search-form');

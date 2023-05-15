@@ -9,8 +9,6 @@
 </head>
 <body>
 
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Главная</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -424,7 +422,8 @@
         <div class="col">
           <h4><a class="text-white text-decoration-none" href="/">Главная</a></h4>
           <h5><a class="text-white text-decoration-none" href="/admin/users">Управление пользователями</a></h5>
-          <h5><a class="text-white text-decoration-none" href="/auto-blog">Блог</a></h5>
+          <h5><a sec:authorize="hasAuthority('ROLE_USER')" class="text-white text-decoration-none" href="/auto-blog">Блог</a></h5>
+          <h5><a sec:authorize="hasAuthority('ROLE_ADMIN')" class="text-white text-decoration-none" href="/admin_panel">Блог</a></h5>
         </div>
         <div class="col">
           <h5 class="text-white">Авторство</h5>
