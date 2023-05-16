@@ -41,6 +41,7 @@ public class WebSecurityConfig {
                 //Permit css files for all users
                 .requestMatchers("/css/**").permitAll()
                 .requestMatchers("/images/**").permitAll()
+                .requestMatchers("/js/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()

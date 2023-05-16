@@ -57,3 +57,25 @@ thead {
 
     background: rgba(0, 0, 0, 0.6);
 }
+
+body {
+    top: 0 !important;
+}
+.skiptranslate {
+    display: none;
+    height: 0;
+}
+.language__img {
+    cursor: pointer;
+}
+
+.navbar-nav.ml-auto {
+    margin-left: auto !important;
+}
+
+.navbar-nav.ml-2 {
+    margin-left: 1rem !important;
+}
+.navbar-nav.mr-2 {
+    margin-right: 1rem !important;
+}
