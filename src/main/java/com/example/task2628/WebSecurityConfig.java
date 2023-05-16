@@ -28,14 +28,11 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 //Доступ только для не зарегистрированных пользователей
                 .requestMatchers("/registration").permitAll()
-                .requestMatchers("/auto-blog").permitAll()
                 //Доступ только для пользователей с ролью Администратор
                 .requestMatchers("/edit/**").hasRole("ADMIN")
                 .requestMatchers("/create").hasRole("ADMIN")
                 .requestMatchers("/fill").hasRole("ADMIN")
                 .requestMatchers("/delete/**").hasRole("ADMIN")
-                .requestMatchers("/blog/**").hasRole("ADMIN")
-                .requestMatchers("/admin_panel/**").hasRole("ADMIN")
                 //Доступ разрешен всем пользователей
                 .requestMatchers("/", "/resources/**").permitAll()
                 //Permit css files for all users

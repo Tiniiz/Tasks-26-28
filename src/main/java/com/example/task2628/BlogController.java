@@ -37,7 +37,8 @@ public class BlogController {
         }
 
         model.addAttribute("List", blogList);
-        return "autoblog";
+        model.addAttribute("blog", new Blog());
+        return "auto_blog";
     }
 
     @RequestMapping({"/blog/new"})
@@ -53,7 +54,7 @@ public class BlogController {
     )
     public String saveBook(@ModelAttribute("blog") Blog blog) {
         this.blogService.add(blog);
-        return "redirect:/admin_panel";
+        return "redirect:/auto_blog";
     }
 
     @RequestMapping({"/blog/edit/{id}"})
@@ -67,13 +68,13 @@ public class BlogController {
     @RequestMapping({"/blog/delete/{id}"})
     public String deleteBlog(@PathVariable(name = "id") Long id) {
         this.blogService.del(id);
-        return "redirect:/admin_panel";
+        return "redirect:/auto_blog";
     }
 
     @RequestMapping("/blog/truncate")
     public String truncateBook() {
         blogService.truncate();
-        return "redirect:/";
+        return "redirect:/auto_blog";
     }
 
     @GetMapping("/auto-blog")
